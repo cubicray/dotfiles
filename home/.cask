@@ -1,0 +1,61 @@
+#!/bin/bash
+
+brew update
+brew upgrade
+brew install phinze/cask/brew-cask
+
+brew cask install anki
+brew cask install bittorrent-sync
+brew cask install box-sync
+brew cask install caffeine
+brew cask install colloquy
+brew cask install dropbox
+brew cask install flux
+brew cask install firefox
+brew cask install google-chrome
+brew cask install imageoptim
+brew cask install iterm2
+brew cask install linein
+brew cask install logitech-control-center
+brew cask install mactracker
+brew cask install myphonedesktop
+brew cask install nvalt
+brew cask install rcdefaultapp
+brew cask install sabnzbd
+brew cask install shuttle
+brew cask install simple-comic
+brew cask install skitch
+brew cask install skype
+brew cask install spotify
+brew cask install sublime-text
+brew cask install transmission
+brew cask install vlc
+brew cask install vox-preference-pane
+
+brew cask install onepassword
+brew cask install alfred
+brew cask install appzapper
+brew cask install arq
+brew cask install bartender
+brew cask install carbon-copy-cloner
+brew cask install choosy
+brew cask install daisydisk
+brew cask install dash
+brew cask install default-folder-x
+brew cask install devonthink-pro
+brew cask install divvy
+brew cask install fantastical
+brew cask install fluid
+brew cask install istat-menus
+brew cask install kaleidoscope
+brew cask install keyboard-maestro
+brew cask install little-snitch
+brew cask install mailplane
+brew cask install netshade
+brew cask install soulver
+brew cask install textexpander
+brew cask install totalfinder
+brew cask install transmit
+
+brew cask alfred
+brew cleanup
