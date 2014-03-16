@@ -57,5 +57,5 @@ brew cask install textexpander
 brew cask install totalfinder
 brew cask install transmit
 
-brew cask alfred
+brew cask alfred link
 brew cleanup
