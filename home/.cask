@@ -25,7 +25,7 @@ brew cask install sabnzbd
 brew cask install shuttle
 brew cask install simple-comic
 brew cask install skitch
-brew cask install sky
+brew cask install skype
 brew cask install spotify
 brew cask install teleport
 brew cask install sublime-text
