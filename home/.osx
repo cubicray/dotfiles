@@ -13,48 +13,43 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 
 # Disable system sleep timer when using charger/wall power
-# UI: System Preferences -> Energy Saver -> Power Adapter -> Computer sleep -> Never
+# GUI: System Preferences -> Energy Saver -> Power Adapter -> Computer sleep -> Never
 sudo pmset -c sleep 0
 
-# Activate display sleep after 10 minutes of idle time when using charger/wall power
-# UI: System Preferences -> Energy Saver -> Power Adapter -> Display sleep -> 10 min
-sudo pmset -c displaysleep 10
-
 # Disable disk spindown timer when using charger/wall power
-# UI: System Preferences -> Energy Saver -> Power Adapter -> Put hard disks to sleep when possible (uncheck)
+# GUI: System Preferences -> Energy Saver -> Power Adapter -> Put hard disks to sleep when possible (uncheck)
 sudo pmset -c disksleep 0
 
 # Enable wake on ethernet magic packet when using charger/wall power
-# UI: System Preferences -> Energy Saver -> Power Adapter -> Wake for network access (check)
+# GUI: System Preferences -> Energy Saver -> Power Adapter -> Wake for network access (check)
 sudo pmset -c womp 1
+
+###############################################################################
+# Audio/Sound Preferences                                                     #
+###############################################################################
 
 # Disable/mute startup sound/chime on boot
 sudo nvram SystemAudioVolume=" "
-# Reset SystemAudioVolume
-# sudo nvram -d SystemAudioVolume
+
+# Lower the system alert volume
+# GUI 1: System Preferences -> Sound -> Sound Effects -> Alert volume
+# GUI 2: Shift-click volume icon in the menu bar
+defaults write com.apple.systemsound com.apple.sound.beep.volume -float 0.4
+
+# Disable user interface sound effects
+# GUI: System Preferences -> Sound -> Sound Effects -> Play user interface sound effects (uncheck)
+defaults write com.apple.systemsound com.apple.sound.uiaudio.enabled -int 0
+
+# Disable feedback when volume is changed
+# GUI: System Preferences -> Sound -> Sound Effects -> Play feedback when volume is changed (uncheck)
+defaults write -g com.apple.sound.beep.feedback -int 0
 
 ###############################################################################
-# Visual Preferences                                                          #
-###############################################################################
-
-# Set highlight color to green
-# UI: System Preferences -> General -> Highlight color
-defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
-
-# Set sidebar icon size to medium
-# UI: System Preferences -> General -> Sidebar icon size: Medium
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
-
-# Disable menu bar transparency
-# UI: System Preferences -> Desktop & Screen Scaver -> Desktop -> Translucent menu bar (uncheck)
-defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
-
-###############################################################################
-# Windows/Dialog Boxes Preferences                                            #
+# Apps/Windows/Dialog Boxes Preferences                                       #
 ###############################################################################
 
 # Always show scrollbars
-# UI: System Preferences -> General -> Show scroll bars: Always
+# GUI: System Preferences -> General -> Show scroll bars: Always
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 # Possible values: `WhenScrolling`, `Automatic` and `Always`
 
@@ -72,17 +67,17 @@ defaults write com.apple.helpviewer DevMode -bool true
 ###############################################################################
 
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
-# UI: Accessibility -> Zoom -> Use scroll gesture with modifier key to zoom (check)
+# GUI: Accessibility -> Zoom -> Use scroll gesture with modifier key to zoom (check)
 defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
-# UI: Accessibility -> Zoom -> Use scroll gesture with modifier key to zoom: ^ Control
-defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144 # restart?
+# GUI: Accessibility -> Zoom -> Use scroll gesture with modifier key to zoom: ^ Control
+defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
 
 # Set a blazingly fast keyboard repeat rate
-# UI: System Preferences -> Keyboard -> Keyboard -> Key Repeat
-defaults write NSGlobalDomain KeyRepeat -int 0 # restart?
+# GUI: System Preferences -> Keyboard -> Keyboard -> Key Repeat
+defaults write NSGlobalDomain KeyRepeat -int 0
 
 # Disable auto-correct
-# UI: System Preferences -> Keyboard -> Text -> Correct spelling automatically (uncheck)
+# GUI: System Preferences -> Keyboard -> Text -> Correct spelling automatically (uncheck)
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 ###############################################################################
@@ -90,45 +85,37 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 ###############################################################################
 
 # Hide icons for hard drives, servers, and removable media on the desktop
-# UI: Finder Preferences -> General -> Show these items on the desktop
+# GUI: Finder Preferences -> General -> Show these items on the desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
 
 # Disable spring loading for directories
-# UI: Finder -> Preferences -> General -> Spring-loaded folders and windows (uncheck)
+# GUI: Finder -> Preferences -> General -> Spring-loaded folders and windows (uncheck)
 defaults write NSGlobalDomain com.apple.springing.enabled -bool false
 
 # Show all filename extensions
-# UI: Finder -> Preferences -> Advanced -> Show all filename extensions (check)
+# GUI: Finder -> Preferences -> Advanced -> Show all filename extensions (check)
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 # Disable the warning when changing a file extension
-# UI: Finder -> Preferences -> Advanced -> Show warning before changing an extension (uncheck)
+# GUI: Finder -> Preferences -> Advanced -> Show warning before changing an extension (uncheck)
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
-# Enable the warning before emptying the Trash
-# UI: Finder -> Preferences -> Advanced -> Show warning before emptying the Trash
-defaults write com.apple.finder WarnOnEmptyTrash -bool true
-
 # When performing a search, search the current folder by default
-# UI: Finder -> Preferences -> Advanced -> When performing a search: Search the Current Folder
+# GUI: Finder -> Preferences -> Advanced -> When performing a search: Search the Current Folder
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
 # Show path bar
-# UI: Finder menu bar -> View -> Show Path Bar
+# GUI: Finder menu bar -> View -> Show Path Bar
 # Keyboard shortcut: ⌥⌘P
 defaults write com.apple.finder ShowPathbar -bool true
 
 # Show status bar
-# UI: Finder menu bar -> View -> Show Status Bar
+# GUI: Finder menu bar -> View -> Show Status Bar
 # Keyboard shortcut: ⌘/
 defaults write com.apple.finder ShowStatusBar -bool true
-
-# Use list view in all Finder windows by default
-# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
-defaults write com.apple.Finder FXPreferredViewStyle -string "Nlsv"
 
 # Display full POSIX path as Finder window title
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
@@ -136,14 +123,11 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# Enable AirDrop over Ethernet and on unsupported Macs running Lion
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
-
 # Allow quitting via ⌘Q; doing so will also hide desktop icons
 defaults write com.apple.finder QuitMenuItem -bool true
 
 # Show the ~/Library folder
-# UI: Inside home folder: Finder menu bar -> View -> Show View Options (⌘J) -> Show Library Folder (check)
+# GUI: Inside home folder: Finder menu bar -> View -> Show View Options (⌘J) -> Show Library Folder (check)
 chflags nohidden ~/Library
 
 # Enable text selection in Quick Look
@@ -156,25 +140,17 @@ defaults write com.apple.finder QLPanelAnimationDuration -float 0.1
 # Dock Preferences                                                            #
 ###############################################################################
 
-# Set the icon size of Dock items to 35 pixels
-# UI: System Preferences -> Dock -> Size
-defaults write com.apple.dock tilesize -int 35
-
-# Change minimize/maximize window effect (Dock)
-# UI: System Preferences -> Dock -> Minimize windows using: Genie effect
-defaults write com.apple.dock mineffect -string "genie"
+# Position the dock on the left side of the screen
+# GUI: System Preferences -> Dock -> Position on screen: Left
+defaults write com.apple.dock orientation -string left
 
 # Minimize windows into their application’s icon
-# UI: System Preferences -> Dock -> Minimize windows into application icon (check)
+# GUI: System Preferences -> Dock -> Minimize windows into application icon (check)
 defaults write com.apple.dock minimize-to-application -bool true
 
 # Automatically hide and show the Dock
-# UI: System Preferences -> Dock -> Automatically hide and show the Dock (check)
+# GUI: System Preferences -> Dock -> Automatically hide and show the Dock (check)
 defaults write com.apple.dock autohide -bool true
-
-# Show indicator lights for open applications in the Dock
-# UI: System Preferences -> Dock -> Show indicator lights for open applications (check)
-defaults write com.apple.dock show-process-indicators -bool true
 
 # Remove the auto-hiding Dock delay (Dock appears)
 defaults write com.apple.dock autohide-delay -float 0
@@ -190,11 +166,11 @@ defaults write com.apple.dock showhidden -bool true
 ###############################################################################
 
 # Don’t group windows by application in Mission Control
-# UI: System Preferences -> Mission Control -> Group windows by application (uncheck)
+# GUI: System Preferences -> Mission Control -> Group windows by application (uncheck)
 defaults write com.apple.dock expose-group-by-app -bool false
 
 # Hot corners
-# UI: System Preferences -> Mission Control -> Hot Corners ...
+# GUI: System Preferences -> Mission Control -> Hot Corners ...
 # Possible values:
 #  0: no-op
 #  2: Mission Control
@@ -220,10 +196,6 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 # Safari Preferences                                                          #
 ###############################################################################
 
-# Enable the resume function in Safari
-# UI: Safari -> Preferences -> General -> Safari opens with: All windows from last session
-defaults write com.apple.Safari NSQuitAlwaysKeepsWindows -int 1
-
 # Set new Window and New Tab behavior in Safari
 # Possible values:
 #  0: Homepage
@@ -232,26 +204,26 @@ defaults write com.apple.Safari NSQuitAlwaysKeepsWindows -int 1
 #  3: Bookmarks
 #  4: Top Sites
 # Set new windows to open with: Empty Page
-# UI: Safari -> Preferences -> General -> New windows open with: Empty Page
+# GUI: Safari -> Preferences -> General -> New windows open with: Empty Page
 defaults write com.apple.Safari NewWindowBehavior -int 1
 # Set new tabs to open with: Homepage
-# UI: Safari -> Preferences -> General -> New tabs open with: Homepage
+# GUI: Safari -> Preferences -> General -> New tabs open with: Homepage
 defaults write com.apple.Safari NewTabBehavior -int 0
 
 # Set Safari’s home page to Google.com
-# UI: Safari -> Preferences -> General -> Homepage: https://www.google.com
+# GUI: Safari -> Preferences -> General -> Homepage: https://www.google.com
 defaults write com.apple.Safari HomePage -string "https://www.google.com"
 
 # Prevent Safari from opening ‘safe’ files automatically after downloading
-# UI: Safari -> Preferences -> General -> Open "safe" files after downloading (uncheck)
+# GUI: Safari -> Preferences -> General -> Open "safe" files after downloading (uncheck)
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 
 # Make Safari’s search banners default to Contains instead of Starts With
-# UI: Safari menu bar -> Edit -> Find -> Find... (⌘F) -> Click on the search icon (magnifying glass)
+# GUI: Safari menu bar -> Edit -> Find -> Find... (⌘F) -> Click on the search icon (magnifying glass)
 defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 
 # Enable the Develop menu in Safari
-# UI: Safari -> Preferences -> Advanced -> Show Develop menu in menu bar (check)
+# GUI: Safari -> Preferences -> Advanced -> Show Develop menu in menu bar (check)
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 
 # Enable Safari’s debug menu
@@ -262,15 +234,15 @@ defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 ###############################################################################
 
 # Use plain text mode for new TextEdit documents
-# UI: TextEdit -> Preferences -> New Document -> Format -> Plain text
+# GUI: TextEdit -> Preferences -> New Document -> Format -> Plain text
 defaults write com.apple.TextEdit RichText -int 0
 
 # Save files as UTF-8 in TextEdit
-# UI: TextEdit -> Preferences -> Open and Save -> Plain Text File Encoding -> Opening files: Unicode (UTF-8)
+# GUI: TextEdit -> Preferences -> Open and Save -> Plain Text File Encoding -> Opening files: Unicode (UTF-8)
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 
 # Open files as UTF-8 in TextEdit
-# UI: TextEdit -> Preferences -> Open and Save -> Plain Text File Encoding -> Saving files: Unicode (UTF-8)
+# GUI: TextEdit -> Preferences -> Open and Save -> Plain Text File Encoding -> Saving files: Unicode (UTF-8)
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
 ###############################################################################
@@ -283,6 +255,14 @@ defaults write com.apple.appstore ShowDebugMenu -bool true
 ###############################################################################
 # Other Random Preferences                                                    #
 ###############################################################################
+
+# Set highlight color to green
+# GUI: System Preferences -> General -> Highlight color
+defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
+
+# Disable menu bar transparency
+# GUI: System Preferences -> Desktop & Screen Scaver -> Desktop -> Translucent menu bar (uncheck)
+defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
 # Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
