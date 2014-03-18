@@ -7,6 +7,7 @@ brew cask install anki
 brew cask install bittorrent-sync
 brew cask install box-sync
 brew cask install caffeine
+brew cask install cloudytabs
 brew cask install colloquy
 brew cask install dropbox
 brew cask install flux
@@ -14,6 +15,7 @@ brew cask install firefox
 brew cask install google-chrome
 brew cask install imageoptim
 brew cask install iterm2
+brew cask install launchrocket
 brew cask install linein
 brew cask install logitech-control-center
 brew cask install mactracker
@@ -27,7 +29,8 @@ brew cask install skitch
 brew cask install skype
 brew cask install spotify
 brew cask install teleport
-brew cask install sublime-text
+brew cask install the-unarchiver
+# brew cask install sublime-text (error)
 brew cask install transmission
 brew cask install vlc
 brew cask install vox-preference-pane
@@ -47,7 +50,7 @@ brew cask install divvy
 brew cask install fantastical
 brew cask install fluid
 brew cask install istat-menus
-brew cask install kaleidoscope
+# brew cask install kaleidoscope (error)
 brew cask install keyboard-maestro
 brew cask install mailplane
 brew cask install netshade
